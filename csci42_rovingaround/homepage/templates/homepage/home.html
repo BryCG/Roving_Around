@@ -1,0 +1,73 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+
+{% block title %}
+    Roving Around
+{% endblock %}
+
+{% block content %}
+    <div class="bar">
+        {% if user.is_authenticated %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/logout">Logout</a></h5></li>
+        <li><h5><a href= "/login/profile">Profile</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+
+        {% else %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/login/">Login</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+        {% endif %}
+    </div>
+    <center><h2>Travel worry-free. Book now.</h2></center>
+
+    <h4>Search for Dog Walkers/Sitters:</h4>
+    <ol>
+        <form action="/" method="get">
+            <input name="q" type="text" placeholder="Type Location">
+        </form><br>
+
+        {% for profile in search_profiles %}
+            <h4><a href = {% url 'homepage:displayprofile' profile.user.pk %}>{{profile.user.first_name}} {{profile.user.last_name}}</a></h4>
+            <p>{{profile.user.username}} <br>
+                {{profile.user.email}}<br>
+                {{profile.city}}, {{profile.province}}
+            </p><br>
+        {% empty %}
+          No result
+      {% endfor %}
+    </ol>
+
+    
+    <h4>Dog Sitters/Walker Near You:</h4>
+    <ol>
+        {% for profile in recommended_profiles %}
+            <h4><a href = {% url 'homepage:displayprofile' profile.user.pk %}>{{profile.user.first_name}} {{profile.user.last_name}}</a></h4>
+            <p>{{profile.user.username}} <br>
+                {{profile.user.email}}<br>
+                {{profile.city}}, {{profile.province}}
+            </p><br>
+        {% empty %}
+            No users yet
+        {% endfor %}
+    </ol><br>
+
+    <h4>All Dog Sitters/Walker:</h4>
+    <ol>
+        {% for profile in all_profile %}
+            <h4><a href = {% url 'homepage:displayprofile' profile.user.pk %}>{{profile.user.first_name}} {{profile.user.last_name}}</a></h4>
+            <p>{{profile.user.username}} <br>
+                {{profile.user.email}}<br>
+                {{profile.city}}, {{profile.province}}
+            </p><br>
+        {% empty %}
+            No users yet
+        {% endfor %}
+    </ol><br>
+    
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "login/header.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Login | Roving Around
+{% endblock %}
+
+{% block content %}      
+
+<div class="bar">
+  {% if user.is_authenticated %}
+  <h1><b><a href="/">Roving Around</a></b></h1>
+  <ul>
+  <li><a href="/logout">Logout</a></li>
+  <li><a href= "/login/profile">Profile</a></li>
+  <li>Help</li>
+  </ul>
+
+  {% else %}
+  <h1><b><a href="/">Roving Around</a></b></h1>
+  <ul>
+  <li><h5><a href="/login/">Login</a></h5></li>
+  <li><h5>Help</h5></li>
+  </ul>
+  {% endif %}
+</div>
+
+  <!--Login--> 
+  <div class="container py-5">
+    <h1>Login</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {{ login_form.as_table }}
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <p class="text-center">Don't have an account? <a href="register">Create an account</a>.</p>
+  </div>
+{% endblock %}

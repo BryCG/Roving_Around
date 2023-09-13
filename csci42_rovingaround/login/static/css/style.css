@@ -1,0 +1,32 @@
+.bar {
+    background-color: #89A6EA;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    color:whitesmoke;
+} 
+
+.bar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px; 
+}
+
+body {
+    background-color: #fdfdfd;
+    margin: 0 20px; 
+}
+
+h1{
+    margin:0 20px;
+}
+
+h4{
+    margin:0 20px;
+}
+
+
+p {
+    margin: 0 20px;
+}

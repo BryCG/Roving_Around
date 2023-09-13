@@ -1,0 +1,51 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+
+{% block title %}
+    Accepting Bookings | Roving Around
+{% endblock %}
+
+{% block content %}
+    <div class="bar">
+        {% if user.is_authenticated %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/logout">Logout</a></h5></li>
+        <li><h5><a href= "/login/profile">Profile</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+
+        {% else %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/login/">Login</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+        {% endif %}
+    </div>
+
+    <h1>Bookings</h1>
+
+    {% if bookings %}
+        <ul>
+            {% for booking in bookings %}
+                <li>
+                    <strong>Booking ID:</strong> {{ booking.pk }}<br>
+                    <strong>Dog Owner:</strong> {{ booking.dogowner }}<br>
+                    <strong>Date Start:</strong> {{ booking.date_start }}<br>
+                    <strong>Date End:</strong> {{ booking.date_end }}<br>
+                    <strong>Payment:</strong> {{ booking.get_payment_display }}<br>
+
+                    <form method="POST" action="{% url 'homepage:accepting' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="booking_id" value="{{ booking.pk }}">
+                        <button type="submit" name="action" value="accept">Accept</button>
+                        <button type="submit" name="action" value="decline">Decline</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bookings available.</p>
+    {% endif %}
+{% endblock %}

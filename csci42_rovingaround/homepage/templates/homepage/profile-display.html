@@ -1,0 +1,41 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+
+{% block title %}
+    Dog Sitter/Walker {{user.first_name}} {{user.last_name}} Profile | Roving Around
+{% endblock %}
+
+{% block content %}
+    <div class="bar">
+        {% if user.is_authenticated %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/logout">Logout</a></h5></li>
+        <li><h5><a href= "/login/profile">Profile</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+
+        {% else %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/login/">Login</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+        {% endif %}
+    </div>
+    
+    <h2>{{user.first_name}} {{user.last_name}}</h2>
+    <p>
+        {{user.username}}<br>
+        {{user.email}}<br>
+        {{user.profile.city}}, {{user.profile.province}}<br>
+    </p>
+    <!-- <p> {{description}}</p> -->
+    
+    <p><a href = {% url 'homepage:booking' user.pk %}>Book Now.</a></p>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 981003db6e892e73e1a1ad4b4ad7773921d49d70
+
+{% endblock %}

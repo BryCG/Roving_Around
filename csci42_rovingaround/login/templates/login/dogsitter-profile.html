@@ -1,0 +1,41 @@
+{% extends "login/header.html" %}
+
+{% block title %} {{user.first_name}} {{user.last_name}} | Roving Around{% endblock title %}
+{% block content %}      
+
+{% load crispy_forms_tags %}
+
+    <div class="bar">
+        {% if user.is_authenticated %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/logout">Logout</a></h5></li>
+        <li><h5><a href= "/login/profile">Profile</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+
+        {% else %}
+        <h1><b><a href="/">Roving Around</a></b></h1>
+        <ul>
+        <li><h5><a href="/login/">Login</a></h5></li>
+        <li><h5>Help</h5></li>
+        </ul>
+        {% endif %}
+    </div>
+
+<div class="row my-3 p-3">
+    <h1>Hello, {{user.first_name}} {{user.last_name}}</h1>
+</div>
+
+
+<p>
+
+Email: {{user.email}} <br>
+Full Name: {{user.first_name}} {{user.last_name}} <br>
+Status: {{user.profile.status}} 
+
+</p>
+
+
+
+{% endblock content %} 

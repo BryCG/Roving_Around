@@ -1,0 +1,53 @@
+{% extends "login/header.html" %}
+
+{% load static %}
+
+{% block title %}
+    Registration Page | Roving Around
+{% endblock %}
+
+{% block content %}  
+ 
+<div class="bar">
+    {% if user.is_authenticated %}
+    <h1><b><a href="/">Roving Around</a></b></h1>
+    <ul>
+    <li><h5><a href="/logout">Logout</a></h5></li>
+    <li><h5><a href= "/login/profile">Profile</a></h5></li>
+    <li><h5>Help</h5></li>
+    </ul>
+
+    {% else %}
+    <h1><b><a href="/">Roving Around</a></b></h1>
+    <ul>
+    <li><h5><a href="/login/">Login</a></h5></li>
+    <li><h5>Help</h5></li>
+    </ul>
+    {% endif %}
+</div>
+  
+<div class = "login">  
+  
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}  
+      
+    <h1>Register Here</h1>  
+  
+         <form method="post" >  
+             {% csrf_token %}  
+             <table>  
+                {{ registration_form.as_table }}  
+                 <tr>  
+                    <td></td>  
+                    <td><input type="submit" name="submit" value="Register" /></td>  
+                </tr>  
+             </table>  
+         </form>  
+     </div>  
+  
+{% endblock content %} 
